@@ -81,3 +81,64 @@ The Staff table stores information about coaches, assistants, medical personnel,
 MatchStaff Table 
 The MatchStaff table connects staff members to the matches they participated in, serving as a junction table to model their many-to-many relationship with matches. It also records the specific role the staff member served in that match (e.g., Head Coach, Physio). This enables detailed analysis of match preparation and staffing patterns. 
 
+CREATE TABLE Player (
+    player_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    birth_date DATE NOT NULL,
+    nationality VARCHAR(50),
+    position VARCHAR(30) NOT NULL,
+    shirt_number INT UNIQUE,
+    INDEX idx_position (position)
+);
+
+CREATE TABLE MatchInfo (
+    match_id INT AUTO_INCREMENT PRIMARY KEY,
+    match_date DATE NOT NULL,
+    opponent VARCHAR(100) NOT NULL,
+    competition VARCHAR(100),
+    stadium VARCHAR(100),
+    goals_for INT DEFAULT 0,
+    goals_against INT DEFAULT 0
+);
+
+CREATE TABLE Performance (
+    performance_id INT AUTO_INCREMENT PRIMARY KEY,
+    player_id INT NOT NULL,
+    match_id INT NOT NULL,
+    goals INT DEFAULT 0,
+    assists INT DEFAULT 0,
+    minutes_played INT DEFAULT 0,
+    rating VARCHAR(5),
+    FOREIGN KEY (player_id) REFERENCES Player(player_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (match_id) REFERENCES MatchInfo(match_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    INDEX idx_performance (player_id, match_id)
+);
+
+CREATE TABLE Staff (
+    staff_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    email VARCHAR(100),
+    phone VARCHAR(20),
+    INDEX idx_role (role)
+);
+
+CREATE TABLE MatchStaff (
+    matchstaff_id INT AUTO_INCREMENT PRIMARY KEY,
+    match_id INT NOT NULL,
+    staff_id INT NOT NULL,
+    role_in_match VARCHAR(50),
+    FOREIGN KEY (match_id) REFERENCES MatchInfo(match_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (staff_id) REFERENCES Staff(staff_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    UNIQUE (match_id, staff_id)  -- Prevent duplicate assignments
+);
+
+
