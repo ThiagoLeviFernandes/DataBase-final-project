@@ -8,6 +8,59 @@ User’s Perspective:
 From a user’s perspective, this system can be used by coaches, analysts, and administrative staff. Coaches can view players’ stats, track goals or assists per match, and monitor fitness updates. Analysts can generate performance reports per player or per match to identify trends and make data-driven decisions. Administrative staff can register players, schedule upcoming matches, and maintain match histories — all from a single relational database. 
 The system ensures data accuracy, quick access to information, and easy reporting — reducing the amount of manual work currently done in spreadsheets or paper records.
 
+erDiagram
+
+    Player {
+        int player_id PK
+        varchar full_name
+        date birth_date
+        varchar nationality
+        varchar position
+        int shirt_number
+    }
+
+    Match_Info {
+        int match_id PK
+        date match_date
+        varchar opponent
+        varchar competition
+        varchar stadium
+        int goals_for
+        int goals_against
+    }
+
+    Staff {
+        int staff_id PK
+        varchar full_name
+        varchar role
+        varchar email
+        varchar phone
+    }
+
+    Performance {
+        int performance_id PK
+        int player_id FK
+        int match_id FK
+        int goals
+        int assists
+        int minutes_played
+        varchar rating
+    }
+
+    Match_staff {
+        int matchstaff_id PK
+        int match_id FK
+        int staff_id FK
+        varchar role_in_match
+    }
+
+    Player ||--o{ Performance : "has performances"
+    Match_Info ||--o{ Performance : "has performances"
+
+    Match_Info ||--o{ Match_staff : "includes staff"
+    Staff ||--o{ Match_staff : "works in matches"
+
+
 Overall Database Design: 
 The Flamengo FC Professional Team database was designed to efficiently store and organize information related to players, staff members, matches, and performance statistics. The goal was to create a relational structure that mirrors how a real professional soccer club manages its operational data while maintaining simplicity and full normalization. The core of the design focuses on two main entities — Player and MatchInfo — and a Performance table that records the many-to-many relationship between them, since players participate in multiple matches and each match includes multiple players. This separation ensures that performance statistics are not duplicated and can be analyzed cleanly. 
 During the normalization process, all tables were brought to Third Normal Form (3NF). This required separating staff information into its own table and creating a junction table, MatchStaff, to represent the many-to-many relationship between matches and staff members. Without a linking table, staff involvement in matches would either be partially represented or create unnecessary duplication. By isolating attributes into their appropriate tables and ensuring that each non-key attribute depends solely on its table's primary key, the database avoids update, insertion, and deletion anomalies. 
