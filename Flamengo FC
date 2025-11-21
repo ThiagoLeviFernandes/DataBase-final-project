@@ -430,3 +430,18 @@ This deletes a performance row where the player had 0 minutes played. Useful for
 Query 8
 DELETE FROM Performance
 WHERE minutes_played = 90;
+
+This view shows summary statistics for each player, including total goals and assists. Views allow reusable queries for dashboards or applications.
+Query 9
+CREATE OR REPLACE VIEW Player_Stats AS
+SELECT 
+    P.player_id,
+    P.full_name,
+    SUM(F.goals) AS total_goals,
+    SUM(F.assists) AS total_assists
+FROM Player P
+JOIN Performance F ON P.player_id = F.player_id
+GROUP BY P.player_id;
+
+-- Demonstrate using the view
+SELECT * FROM Player_Stats LIMIT 10;
