@@ -374,3 +374,59 @@ SELECT P.full_name, F.goals, F.assists,
 (F.goals + F.assists) AS total_contribution
 FROM Performance F
 JOIN Player P ON F.player_id = P.player_id;
+
+This query extracts the month of each match using the MONTH() function. Useful to analyze match frequency or performance by month.
+Query 3
+SELECT 
+    match_id,
+    match_date,
+    MONTH(match_date) AS match_month,
+    opponent
+FROM Match_Info
+LIMIT 10;
+
+This query calculates the total goals scored by each player and returns only players with 5 or more total goal contributions. This is helpful for identifying high-impact players.
+Query 4
+SELECT 
+    P.full_name,
+    SUM(F.goals) AS total_goals,
+    SUM(F.assists) AS total_assists
+FROM Performance F
+JOIN Player P ON F.player_id = P.player_id
+GROUP BY P.full_name
+HAVING SUM(F.goals) + SUM(F.assists) >= 5;
+
+This query combines Player, Performance, and Match_Info to show player stats for each match. This multi-table join is useful for match analysis systems.
+Query 5
+SELECT 
+    P.full_name,
+    M.opponent,
+    F.goals,
+    F.assists,
+    F.minutes_played
+FROM Performance F
+JOIN Player P ON F.player_id = P.player_id
+JOIN Match_Info M ON F.match_id = M.match_id
+LIMIT 10;
+
+This query lists all staff members and any match they participated in. Staff who did not work in a match will still appear because of the LEFT JOIN.
+Query 6
+SELECT 
+    S.full_name,
+    MS.match_id,
+    MS.role_in_match
+FROM Staff S
+LEFT JOIN Match_staff MS ON S.staff_id = MS.staff_id
+ORDER BY S.staff_id
+LIMIT 20;
+
+This query updates a player’s shirt number. This is used when a player changes jersey numbers during the season.
+Query 7
+UPDATE Player
+SET shirt_number = 99
+WHERE full_name = 'Pedro Guilherme';
+
+This deletes a performance row where the player had 0 minutes played. Useful for cleaning data when substitutions never entered the match.
+Query 8
+DELETE FROM Performance
+WHERE minutes_played = 90;
