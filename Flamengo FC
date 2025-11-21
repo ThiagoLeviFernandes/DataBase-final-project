@@ -445,3 +445,17 @@ GROUP BY P.player_id;
 
 -- Demonstrate using the view
 SELECT * FROM Player_Stats LIMIT 10;
+
+This query demonstrates a transaction: inserting a test player and then rolling back the change. Transactions protect the database from unwanted modifications.
+Query 10
+START TRANSACTION;
+
+INSERT INTO Player (full_name, birth_date, nationality, position, shirt_number)
+VALUES ('TEST PLAYER', '2000-01-01', 'Brazil', 'Forward', 99);
+
+SELECT * FROM Player WHERE full_name = 'TEST PLAYER';
+
+ROLLBACK;
+
+SELECT * FROM Player WHERE full_name = 'TEST PLAYER';
+
