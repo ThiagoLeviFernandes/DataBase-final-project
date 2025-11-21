@@ -362,7 +362,15 @@ VALUES
 
 Queries
 
+This query retrieves all players and orders them first by position and then by shirt_number. This type of sorting is useful when coaches want to see the roster organized by tactical roles and player jersey number order.
 Query 1
 SELECT player_id, full_name, position, shirt_number
 FROM Player
 ORDER BY position, shirt_number;
+
+This query calculates a player’s goal contribution per match by adding goals and assists. It is used to evaluate a player’s direct involvement in scoring actions.
+Query 2
+SELECT P.full_name, F.goals, F.assists,
+(F.goals + F.assists) AS total_contribution
+FROM Performance F
+JOIN Player P ON F.player_id = P.player_id;
