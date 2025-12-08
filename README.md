@@ -825,6 +825,12 @@ Empty set (0.001 sec)
 
 ---
 
-Reports
-[View Chart Report]: (https://huntingtonedu-my.sharepoint.com/personal/fernandest_huntington_edu/Documents/reportfinalproject.pdf)
-[View Table Report]: (https://huntingtonedu-my.sharepoint.com/personal/fernandest_huntington_edu/Documents/playerfinalprojectreport.pdf)
+### Reports
+
+**Sample Access Report (displayed on this page)**
+![Sample Access Report!](1003.PNG "Sample Access Report")
+
+
+**Sample Access Report (link)**
+[Sample Access Report!](1003.PNG "Sample Access Report")
+
