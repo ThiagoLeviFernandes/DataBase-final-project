@@ -10,8 +10,9 @@ The system ensures data accuracy, quick access to information, and easy reportin
 
 ---
 
+## Database ER Model
+```mermaid
 erDiagram
-
     Player {
         int player_id PK
         varchar full_name
@@ -61,7 +62,7 @@ erDiagram
 
     Match_Info ||--o{ Match_staff : "includes staff"
     Staff ||--o{ Match_staff : "works in matches"
-
+```
 
 Overall Database Design: 
 The Flamengo FC Professional Team database was designed to efficiently store and organize information related to players, staff members, matches, and performance statistics. The goal was to create a relational structure that mirrors how a real professional soccer club manages its operational data while maintaining simplicity and full normalization. The core of the design focuses on two main entities — Player and MatchInfo — and a Performance table that records the many-to-many relationship between them, since players participate in multiple matches and each match includes multiple players. This separation ensures that performance statistics are not duplicated and can be analyzed cleanly. 
