@@ -743,13 +743,22 @@ Rows matched: 1  Changed: 1  Warnings: 0
 
 ---
 
+## Query 8
 This deletes a performance row where the player had 0 minutes played. Useful for cleaning data when substitutions never entered the match.
-Query 8
+```sql
 DELETE FROM Performance
 WHERE minutes_played = 90;
+```
+**Sample Output**
+```code
+Query OK, 56 rows affected (0.003 sec)
+```
 
+---
+
+## Query 9
 This view shows summary statistics for each player, including total goals and assists. Views allow reusable queries for dashboards or applications.
-Query 9
+```sql
 CREATE OR REPLACE VIEW Player_Stats AS
 SELECT 
     P.player_id,
@@ -762,19 +771,59 @@ GROUP BY P.player_id;
 
 -- Demonstrate using the view
 SELECT * FROM Player_Stats LIMIT 10;
+```
+**Sample Output**
+```code
+Query OK, 0 rows affected (0.010 sec)
 
-This query demonstrates a transaction: inserting a test player and then rolling back the change. Transactions protect the database from unwanted modifications.
++-----------+------------------------+-------------+---------------+
+| player_id | full_name              | total_goals | total_assists |
++-----------+------------------------+-------------+---------------+
+|         1 | Pedro Guilherme        |           1 |             1 |
+|         2 | Gabriel Barbosa        |           1 |             1 |
+|         3 | Giorgian De Arrascaeta |           0 |             1 |
+|         4 | Everton Ribeiro        |           0 |             2 |
+|         5 | Bruno Henrique         |           1 |             2 |
+|         6 | David Luiz             |           0 |             0 |
+|         7 | Fabrício Bruno         |           1 |             0 |
+|         8 | Matheuzinho            |           0 |             1 |
+|         9 | Ayrton Lucas           |           0 |             0 |
+|        10 | Pulgar                 |           0 |             0 |
++-----------+------------------------+-------------+---------------+
+10 rows in set (0.002 sec)
+```
+
+---
+
 Query 10
+This query demonstrates a transaction: inserting a test player and then rolling back the change. Transactions protect the database from unwanted modifications.
+```sql
 START TRANSACTION;
 
 INSERT INTO Player (full_name, birth_date, nationality, position, shirt_number)
-VALUES ('TEST PLAYER', '2000-01-01', 'Brazil', 'Forward', 99);
+VALUES ('TEST PLAYER', '2000-01-01', 'Brazil', 'Forward', 100);
 
 SELECT * FROM Player WHERE full_name = 'TEST PLAYER';
 
 ROLLBACK;
 
 SELECT * FROM Player WHERE full_name = 'TEST PLAYER';
+```
+**Sample Output**
+```code
+ROM +-----------+-------------+------------+-------------+----------+--------------+
+| player_id | full_name   | birth_date | nationality | position | shirt_number |
++-----------+-------------+------------+-------------+----------+--------------+
+|        22 | TEST PLAYER | 2000-01-01 | Brazil      | Forward  |          100 |
++-----------+-------------+------------+-------------+----------+--------------+
+1 row in set (0.001 sec)
+
+Query OK, 0 rows affected (0.000 sec)
+
+Empty set (0.001 sec)
+```
+
+---
 
 Reports
 [View Chart Report]: (https://huntingtonedu-my.sharepoint.com/personal/fernandest_huntington_edu/Documents/reportfinalproject.pdf)
