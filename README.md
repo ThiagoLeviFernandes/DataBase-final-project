@@ -1,12 +1,14 @@
 # Flamengo FC Professional Team Database 
 
-Business Description:  
+## Business Description:  
 Flamengo FC, officially known as Clube de Regatas do Flamengo, is one of Brazil’s most popular and successful football clubs, based in Rio de Janeiro. The organization manages hundreds of players across different age categories, multiple competitions per season, and a massive base of fans and staff members. 
 This database is designed to support the club’s internal operations, focusing on player management, match scheduling, and performance tracking. It will help staff easily store, retrieve, and analyze essential information such as player statistics, match outcomes, training sessions, and team performance indicators. 
 
-User’s Perspective: 
+### User’s Perspective: 
 From a user’s perspective, this system can be used by coaches, analysts, and administrative staff. Coaches can view players’ stats, track goals or assists per match, and monitor fitness updates. Analysts can generate performance reports per player or per match to identify trends and make data-driven decisions. Administrative staff can register players, schedule upcoming matches, and maintain match histories — all from a single relational database. 
 The system ensures data accuracy, quick access to information, and easy reporting — reducing the amount of manual work currently done in spreadsheets or paper records.
+
+---
 
 erDiagram
 
