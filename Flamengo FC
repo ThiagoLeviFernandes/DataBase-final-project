@@ -460,4 +460,5 @@ ROLLBACK;
 SELECT * FROM Player WHERE full_name = 'TEST PLAYER';
 
 Reports
-
+[View Chart Report]: (https://huntingtonedu-my.sharepoint.com/personal/fernandest_huntington_edu/Documents/reportfinalproject.pdf)
+[View Table Report]: (https://huntingtonedu-my.sharepoint.com/personal/fernandest_huntington_edu/Documents/playerfinalprojectreport.pdf)
