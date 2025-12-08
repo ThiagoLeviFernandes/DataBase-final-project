@@ -86,6 +86,10 @@ The MatchStaff table connects staff members to the matches they participated in,
 
 ---
 
+### Create Tables
+The following SQL creates the `Player`, `MatchInfo`, `Performance`,`Staff` and `MatchStaff` tables in the database. Note that it does not create a database, only the tables.
+
+
 CREATE TABLE Player (
     player_id INT PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(100) NOT NULL,
