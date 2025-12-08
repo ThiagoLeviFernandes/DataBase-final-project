@@ -430,8 +430,8 @@ VALUES
 
 ### Queries
 
---This query retrieves all players and orders them first by position and then by shirt_number. This type of sorting is useful when coaches want to see the roster organized by tactical roles and player jersey number order.
 ## Query 1
+--This query retrieves all players and orders them first by position and then by shirt_number. This type of sorting is useful when coaches want to see the roster organized by tactical roles and player jersey number order.
 ```sql
 SELECT player_id, full_name, position, shirt_number
 FROM Player
@@ -469,14 +469,125 @@ ORDER BY position, shirt_number;
 
 ---
 
-
-
+## Query 2
 This query calculates a player’s goal contribution per match by adding goals and assists. It is used to evaluate a player’s direct involvement in scoring actions.
-Query 2
+```sql
 SELECT P.full_name, F.goals, F.assists,
 (F.goals + F.assists) AS total_contribution
 FROM Performance F
 JOIN Player P ON F.player_id = P.player_id;
+```
+**Sample Output**
+```code
++------------------------+-------+---------+--------------------+
+| full_name              | goals | assists | total_contribution |
++------------------------+-------+---------+--------------------+
+| Pedro Guilherme        |     1 |       0 |                  1 |
+| Pedro Guilherme        |     0 |       1 |                  1 |
+| Pedro Guilherme        |     1 |       0 |                  1 |
+| Pedro Guilherme        |     2 |       0 |                  2 |
+| Pedro Guilherme        |     0 |       0 |                  0 |
+| Gabriel Barbosa        |     0 |       1 |                  1 |
+| Gabriel Barbosa        |     1 |       0 |                  1 |
+| Gabriel Barbosa        |     0 |       0 |                  0 |
+| Gabriel Barbosa        |     1 |       1 |                  2 |
+| Gabriel Barbosa        |     0 |       0 |                  0 |
+| Giorgian De Arrascaeta |     1 |       1 |                  2 |
+| Giorgian De Arrascaeta |     0 |       2 |                  2 |
+| Giorgian De Arrascaeta |     0 |       1 |                  1 |
+| Giorgian De Arrascaeta |     1 |       0 |                  1 |
+| Giorgian De Arrascaeta |     0 |       0 |                  0 |
+| Everton Ribeiro        |     0 |       1 |                  1 |
+| Everton Ribeiro        |     0 |       0 |                  0 |
+| Everton Ribeiro        |     1 |       0 |                  1 |
+| Everton Ribeiro        |     0 |       1 |                  1 |
+| Everton Ribeiro        |     0 |       0 |                  0 |
+| Bruno Henrique         |     1 |       0 |                  1 |
+| Bruno Henrique         |     1 |       1 |                  2 |
+| Bruno Henrique         |     0 |       0 |                  0 |
+| Bruno Henrique         |     0 |       1 |                  1 |
+| Bruno Henrique         |     1 |       0 |                  1 |
+| David Luiz             |     0 |       0 |                  0 |
+| David Luiz             |     0 |       0 |                  0 |
+| David Luiz             |     0 |       0 |                  0 |
+| David Luiz             |     1 |       0 |                  1 |
+| David Luiz             |     0 |       0 |                  0 |
+| Fabrício Bruno         |     0 |       0 |                  0 |
+| Fabrício Bruno         |     0 |       0 |                  0 |
+| Fabrício Bruno         |     1 |       0 |                  1 |
+| Fabrício Bruno         |     0 |       0 |                  0 |
+| Fabrício Bruno         |     0 |       0 |                  0 |
+| Matheuzinho            |     0 |       0 |                  0 |
+| Matheuzinho            |     0 |       1 |                  1 |
+| Matheuzinho            |     0 |       0 |                  0 |
+| Matheuzinho            |     0 |       0 |                  0 |
+| Matheuzinho            |     0 |       0 |                  0 |
+| Ayrton Lucas           |     0 |       0 |                  0 |
+| Ayrton Lucas           |     0 |       0 |                  0 |
+| Ayrton Lucas           |     0 |       0 |                  0 |
+| Ayrton Lucas           |     0 |       0 |                  0 |
+| Ayrton Lucas           |     0 |       0 |                  0 |
+| Pulgar                 |     0 |       1 |                  1 |
+| Pulgar                 |     0 |       0 |                  0 |
+| Pulgar                 |     0 |       0 |                  0 |
+| Pulgar                 |     0 |       0 |                  0 |
+| Pulgar                 |     0 |       0 |                  0 |
+| Thiago Maia            |     0 |       0 |                  0 |
+| Thiago Maia            |     0 |       0 |                  0 |
+| Thiago Maia            |     0 |       0 |                  0 |
+| Thiago Maia            |     0 |       0 |                  0 |
+| Thiago Maia            |     0 |       0 |                  0 |
+| Gerson                 |     1 |       0 |                  1 |
+| Gerson                 |     0 |       1 |                  1 |
+| Gerson                 |     1 |       0 |                  1 |
+| Gerson                 |     0 |       0 |                  0 |
+| Gerson                 |     0 |       0 |                  0 |
+| Wesley França          |     0 |       0 |                  0 |
+| Wesley França          |     0 |       0 |                  0 |
+| Wesley França          |     0 |       0 |                  0 |
+| Wesley França          |     1 |       0 |                  1 |
+| Wesley França          |     0 |       0 |                  0 |
+| Victor Hugo            |     0 |       0 |                  0 |
+| Victor Hugo            |     0 |       0 |                  0 |
+| Victor Hugo            |     0 |       1 |                  1 |
+| Victor Hugo            |     0 |       0 |                  0 |
+| Victor Hugo            |     0 |       0 |                  0 |
+| Matheus Cunha          |     0 |       0 |                  0 |
+| Matheus Cunha          |     0 |       0 |                  0 |
+| Matheus Cunha          |     0 |       0 |                  0 |
+| Matheus Cunha          |     0 |       0 |                  0 |
+| Matheus Cunha          |     0 |       0 |                  0 |
+| Rossi                  |     0 |       0 |                  0 |
+| Rossi                  |     0 |       0 |                  0 |
+| Rossi                  |     0 |       0 |                  0 |
+| Rossi                  |     0 |       0 |                  0 |
+| Rossi                  |     0 |       0 |                  0 |
+| Luiz Araújo            |     1 |       0 |                  1 |
+| Luiz Araújo            |     0 |       1 |                  1 |
+| Luiz Araújo            |     0 |       0 |                  0 |
+| Luiz Araújo            |     0 |       0 |                  0 |
+| Luiz Araújo            |     0 |       0 |                  0 |
+| Allan                  |     0 |       0 |                  0 |
+| Allan                  |     0 |       0 |                  0 |
+| Allan                  |     0 |       0 |                  0 |
+| Allan                  |     0 |       0 |                  0 |
+| Allan                  |     0 |       0 |                  0 |
+| Pablo                  |     0 |       0 |                  0 |
+| Pablo                  |     0 |       0 |                  0 |
+| Pablo                  |     0 |       0 |                  0 |
+| Pablo                  |     0 |       0 |                  0 |
+| Pablo                  |     0 |       0 |                  0 |
+| Igor Jesus             |     0 |       0 |                  0 |
+| Igor Jesus             |     0 |       0 |                  0 |
+| Igor Jesus             |     0 |       0 |                  0 |
+| Igor Jesus             |     0 |       0 |                  0 |
+| Igor Jesus             |     0 |       0 |                  0 |
++------------------------+-------+---------+--------------------+
+100 rows in set (0.002 sec)
+
+```
+
+---
 
 This query extracts the month of each match using the MONTH() function. Useful to analyze match frequency or performance by month.
 Query 3
