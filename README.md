@@ -69,20 +69,22 @@ The Flamengo FC Professional Team database was designed to efficiently store and
 During the normalization process, all tables were brought to Third Normal Form (3NF). This required separating staff information into its own table and creating a junction table, MatchStaff, to represent the many-to-many relationship between matches and staff members. Without a linking table, staff involvement in matches would either be partially represented or create unnecessary duplication. By isolating attributes into their appropriate tables and ensuring that each non-key attribute depends solely on its table's primary key, the database avoids update, insertion, and deletion anomalies. 
 Another key design decision was ensuring flexibility. This database could easily expand to include additional Flamengo squads (U20, U17), training sessions, contracts, or injury tracking without major restructuring. The design also includes indexes on frequently queried fields (such as player positions and staff roles), improving query performance. Overall, the model balances clarity, normalization, and real-world usability while supporting complex SQL queries required by the project.
 
-Player Table 
+`Player Table` 
 The Player table stores the essential biographical and professional information for each Flamengo professional player, including name, nationality, position, and shirt number. It serves as the foundation for tracking individual player participation in matches. All player-specific statistics are recorded separately in the Performance table. 
 
-MatchInfo Table 
+`MatchInfo Table`
 The MatchInfo table records all official games Flamengo plays, including the opponent, competition, stadium, date, and final score. It functions as the central reference point for connecting performance data and staff participation. Each match can involve multiple players and multiple staff members. 
 
-Performance Table 
+`Performance Table` 
 The Performance table represents the many-to-many relationship between players and matches, storing detailed in-game statistics such as goals, assists, minutes played, and match rating. This structure allows for robust statistical analysis of individual player performance across different competitions. Each record refers uniquely to a player-match combination. 
 
-Staff Table 
+`Staff Table`
 The Staff table stores information about coaches, assistants, medical personnel, and analysts who work directly with the Flamengo professional squad. It keeps track of their names, roles, and contact information. Since staff may participate in multiple matches, their match involvement is tracked separately. 
 
-MatchStaff Table 
+`MatchStaff Table` 
 The MatchStaff table connects staff members to the matches they participated in, serving as a junction table to model their many-to-many relationship with matches. It also records the specific role the staff member served in that match (e.g., Head Coach, Physio). This enables detailed analysis of match preparation and staffing patterns. 
+
+---
 
 CREATE TABLE Player (
     player_id INT PRIMARY KEY AUTO_INCREMENT,
