@@ -834,3 +834,31 @@ Empty set (0.001 sec)
 **Sample Access Report (link)**
 [Sample Access Report!](1003.PNG "Sample Access Report")
 
+---
+
+**Sample Excel Chart (displayed on this page)**
+![Sample Excel Chart!](1004.png "Sample Excel Chart")
+
+**Sample Excel Chart (link)**
+[Sample Excel Chart!](1004.png "Sample Excel Chart")
+
+---
+
+### Delete Tables
+```sql
+-- Drop the view first
+DROP VIEW IF EXISTS Player_Stats;
+
+-- Drop child tables first (depend on others)
+DROP TABLE IF EXISTS Performance;
+DROP TABLE IF EXISTS Match_Staff;
+
+-- Then drop parent tables
+DROP TABLE IF EXISTS Player;
+DROP TABLE IF EXISTS Match_Info;
+DROP TABLE IF EXISTS Staff;
+```
+
+---
+
+
