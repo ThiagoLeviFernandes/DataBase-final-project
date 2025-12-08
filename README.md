@@ -174,7 +174,7 @@ CREATE TABLE Performance (
 -- Links staff members to specific matches
 -- =========================================================
 
-CREATE TABLE Match_staff (
+CREATE TABLE Match_Staff (
     matchstaff_id   INT PRIMARY KEY AUTO_INCREMENT,
     match_id         INT NOT NULL,
     staff_id         INT NOT NULL,
@@ -203,7 +203,7 @@ CREATE TABLE Match_staff (
 
 ```sql
 
-
+-- Player SAMPLE DATA (20 rows)
 INSERT INTO Player (full_name, birth_date, nationality, position, shirt_number)
 VALUES
 ('Pedro Guilherme', '1997-06-20', 'Brazil', 'Forward', 9),
@@ -227,6 +227,7 @@ VALUES
 ('Pablo', '1991-06-21', 'Brazil', 'Forward', 30),
 ('Igor Jesus', '2003-03-08', 'Brazil', 'Defender', 44);
 
+-- Staff SAMPLE DATA (20 rows)
 INSERT INTO Staff (full_name, role, email, phone) VALUES
 ('Tite', 'Head Coach', 'tite@flamengo.com', '555-1010'),
 ('César Sampaio', 'Assistant Coach', 'sampaio@flamengo.com', '555-2020'),
@@ -249,7 +250,7 @@ INSERT INTO Staff (full_name, role, email, phone) VALUES
 ('Lucas Nogueira', 'Equipment Manager', 'lnogueira@flamengo.com', '555-2021'),
 ('Eduardo Lima', 'Medical Assistant', 'elima@flamengo.com', '555-2121');
 
-
+-- Match_Info SAMPLE DATA (20 rows)
 INSERT INTO Match_Info (match_date, opponent, competition, stadium, goals_for, goals_against)
 VALUES
 ('2025-01-15', 'Vasco da Gama', 'Campeonato Carioca', 'Maracanã', 3, 1),
@@ -273,7 +274,8 @@ VALUES
 ('2025-05-24', 'Coritiba', 'Brasileirão', 'Couto Pereira', 2, 2),
 ('2025-05-31', 'Fluminense', 'Brasileirão', 'Maracanã', 1, 0);
 
-INSERT INTO Match_staff (match_id, staff_id, role_in_match)
+-- Match_Staff SAMPLE DATA (20 rows)
+INSERT INTO Match_Staff (match_id, staff_id, role_in_match)
 VALUES
 (1, 1, 'Head Coach'),
 (1, 2, 'Assistant'),
@@ -296,44 +298,41 @@ VALUES
 (12, 1, 'Head Coach'),
 (13, 1, 'Head Coach');
 
+-------------------------------------------------------
+-- Performance SAMPLE DATA (100 rows)
+-------------------------------------------------------
 INSERT INTO Performance (player_id, match_id, goals, assists, minutes_played, rating)
 VALUES
--- Player 1 (Pedro)
 (1, 1, 1, 0, 90, '7.5'),
 (1, 2, 0, 1, 85, '7.0'),
 (1, 3, 1, 0, 78, '8.0'),
 (1, 4, 2, 0, 90, '8.5'),
 (1, 5, 0, 0, 82, '6.5'),
 
--- Player 2 (Gabigol)
 (2, 1, 0, 1, 90, '7.0'),
 (2, 2, 1, 0, 90, '7.5'),
 (2, 3, 0, 0, 75, '6.5'),
 (2, 4, 1, 1, 88, '8.0'),
 (2, 5, 0, 0, 82, '6.0'),
 
--- Player 3 (Arrascaeta)
 (3, 1, 1, 1, 90, '8.5'),
 (3, 2, 0, 2, 90, '8.0'),
 (3, 3, 0, 1, 89, '7.5'),
 (3, 4, 1, 0, 90, '7.8'),
 (3, 5, 0, 0, 75, '6.5'),
 
--- Player 4
 (4, 1, 0, 1, 85, '7.0'),
 (4, 2, 0, 0, 88, '6.5'),
 (4, 3, 1, 0, 90, '7.8'),
 (4, 4, 0, 1, 82, '7.0'),
 (4, 5, 0, 0, 80, '6.0'),
 
--- Player 5
 (5, 1, 1, 0, 90, '7.2'),
 (5, 2, 1, 1, 87, '8.0'),
 (5, 3, 0, 0, 70, '6.0'),
 (5, 4, 0, 1, 75, '6.8'),
 (5, 5, 1, 0, 90, '7.5'),
 
--- Players 6–20 
 (6, 1, 0, 0, 90, '6.8'),
 (6, 2, 0, 0, 90, '6.5'),
 (6, 3, 0, 0, 88, '6.0'),
