@@ -828,11 +828,11 @@ Empty set (0.001 sec)
 ### Reports
 
 **Sample Access Report (displayed on this page)**
-![Sample Access Report!](1003.PNG "Sample Access Report")
+![Sample Access Report!](1007.PNG "Sample Access Report")
 
 
 **Sample Access Report (link)**
-[Sample Access Report!](1003.PNG "Sample Access Report")
+[Sample Access Report!](1007.PNG "Sample Access Report")
 
 ---
 
