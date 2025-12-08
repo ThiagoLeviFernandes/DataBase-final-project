@@ -863,14 +863,7 @@ DROP TABLE IF EXISTS Staff;
 
 ### Poster and Presentation
 
-Create a poster describing your Database Project using the template provided.  Host poster as .PDF on GitHub, include link to file in your documentation.
-
-[Poster PDF](poster.pdf)
-
-
-Deliver a five-minute presentation during finals that describes your database design, demonstrates your SQL queries, 
-and describing any challenges you encountered and insights you gained from the project.
-
+[Poster PDF](posterfinalproject.pdf)
 
 ---
   -- end --
