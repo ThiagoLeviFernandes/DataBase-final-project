@@ -837,10 +837,10 @@ Empty set (0.001 sec)
 ---
 
 **Sample Excel Chart (displayed on this page)**
-![Sample Excel Chart!](1004.png "Sample Excel Chart")
+![Sample Excel Chart!](1004.PNG "Sample Excel Chart")
 
 **Sample Excel Chart (link)**
-[Sample Excel Chart!](1004.png "Sample Excel Chart")
+[Sample Excel Chart!](1004.PNG "Sample Excel Chart")
 
 ---
 
