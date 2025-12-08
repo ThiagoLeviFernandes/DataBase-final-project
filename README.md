@@ -199,7 +199,7 @@ CREATE TABLE Match_Staff (
 ---
 
 ### Insert Data
-
+The following SQL inserts sample data for the `Player`, `Staff`, `Match_Info`, `Match_Staff` and `Performance` tables in the current database.
 
 ```sql
 
@@ -795,7 +795,7 @@ Query OK, 0 rows affected (0.010 sec)
 
 ---
 
-Query 10
+## Query 10
 This query demonstrates a transaction: inserting a test player and then rolling back the change. Transactions protect the database from unwanted modifications.
 ```sql
 START TRANSACTION;
