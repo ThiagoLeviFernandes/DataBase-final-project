@@ -198,6 +198,12 @@ CREATE TABLE Match_staff (
 
 ---
 
+### Insert Data
+
+
+```sql
+
+
 INSERT INTO Player (full_name, birth_date, nationality, position, shirt_number)
 VALUES
 ('Pedro Guilherme', '1997-06-20', 'Brazil', 'Forward', 9),
@@ -419,7 +425,11 @@ VALUES
 (20, 4, 0, 0, 88, '6.2'),
 (20, 5, 0, 0, 90, '6.1');
 
-Queries
+```
+
+---
+
+### Queries
 
 This query retrieves all players and orders them first by position and then by shirt_number. This type of sorting is useful when coaches want to see the roster organized by tactical roles and player jersey number order.
 Query 1
