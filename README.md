@@ -430,11 +430,46 @@ VALUES
 
 ### Queries
 
-This query retrieves all players and orders them first by position and then by shirt_number. This type of sorting is useful when coaches want to see the roster organized by tactical roles and player jersey number order.
-Query 1
+--This query retrieves all players and orders them first by position and then by shirt_number. This type of sorting is useful when coaches want to see the roster organized by tactical roles and player jersey number order.
+## Query 1
+```sql
 SELECT player_id, full_name, position, shirt_number
 FROM Player
 ORDER BY position, shirt_number;
+```
+**Sample Output**
+```code
++-----------+------------------------+------------+--------------+
+| player_id | full_name              | position   | shirt_number |
++-----------+------------------------+------------+--------------+
+|         9 | Ayrton Lucas           | Defender   |            6 |
+|         7 | Fabrício Bruno         | Defender   |           15 |
+|         6 | David Luiz             | Defender   |           23 |
+|         8 | Matheuzinho            | Defender   |           34 |
+|        13 | Wesley França          | Defender   |           43 |
+|        20 | Igor Jesus             | Defender   |           44 |
+|         1 | Pedro Guilherme        | Forward    |            9 |
+|         2 | Gabriel Barbosa        | Forward    |           10 |
+|        17 | Luiz Araújo            | Forward    |           26 |
+|         5 | Bruno Henrique         | Forward    |           27 |
+|        19 | Pablo                  | Forward    |           30 |
+|        15 | Matheus Cunha          | Goalkeeper |            1 |
+|        16 | Rossi                  | Goalkeeper |           17 |
+|        10 | Pulgar                 | Midfielder |            5 |
+|         4 | Everton Ribeiro        | Midfielder |            7 |
+|        11 | Thiago Maia            | Midfielder |            8 |
+|         3 | Giorgian De Arrascaeta | Midfielder |           14 |
+|        12 | Gerson                 | Midfielder |           20 |
+|        18 | Allan                  | Midfielder |           21 |
+|        14 | Victor Hugo            | Midfielder |           29 |
++-----------+------------------------+------------+--------------+
+20 rows in set (0.001 sec)
+
+```
+
+---
+
+
 
 This query calculates a player’s goal contribution per match by adding goals and assists. It is used to evaluate a player’s direct involvement in scoring actions.
 Query 2
