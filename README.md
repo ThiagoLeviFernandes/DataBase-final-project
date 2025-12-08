@@ -431,7 +431,7 @@ VALUES
 ### Queries
 
 ## Query 1
---This query retrieves all players and orders them first by position and then by shirt_number. This type of sorting is useful when coaches want to see the roster organized by tactical roles and player jersey number order.
+This query retrieves all players and orders them first by position and then by shirt_number. This type of sorting is useful when coaches want to see the roster organized by tactical roles and player jersey number order.
 ```sql
 SELECT player_id, full_name, position, shirt_number
 FROM Player
@@ -589,8 +589,9 @@ JOIN Player P ON F.player_id = P.player_id;
 
 ---
 
+## Query 3
 This query extracts the month of each match using the MONTH() function. Useful to analyze match frequency or performance by month.
-Query 3
+```sql
 SELECT 
     match_id,
     match_date,
@@ -598,9 +599,31 @@ SELECT
     opponent
 FROM Match_Info
 LIMIT 10;
+```
+**Sample Output**
+```code
++----------+------------+-------------+-------------------+
+| match_id | match_date | match_month | opponent          |
++----------+------------+-------------+-------------------+
+|        1 | 2025-01-15 |           1 | Vasco da Gama     |
+|        2 | 2025-01-22 |           1 | Botafogo          |
+|        3 | 2025-02-01 |           2 | Fluminense        |
+|        4 | 2025-02-08 |           2 | Palmeiras         |
+|        5 | 2025-02-15 |           2 | São Paulo         |
+|        6 | 2025-02-22 |           2 | Corinthians       |
+|        7 | 2025-03-01 |           3 | Grêmio            |
+|        8 | 2025-03-08 |           3 | Internacional     |
+|        9 | 2025-03-15 |           3 | Atlético Mineiro  |
+|       10 | 2025-03-22 |           3 | Cuiabá            |
++----------+------------+-------------+-------------------+
+10 rows in set (0.001 sec)
+```
 
+---
+
+## Query 4
 This query calculates the total goals scored by each player and returns only players with 5 or more total goal contributions. This is helpful for identifying high-impact players.
-Query 4
+```sql
 SELECT 
     P.full_name,
     SUM(F.goals) AS total_goals,
@@ -609,9 +632,23 @@ FROM Performance F
 JOIN Player P ON F.player_id = P.player_id
 GROUP BY P.full_name
 HAVING SUM(F.goals) + SUM(F.assists) >= 5;
+```
+**Sample Output**
+```code
++------------------------+-------------+---------------+
+| full_name              | total_goals | total_assists |
++------------------------+-------------+---------------+
+| Bruno Henrique         |           3 |             2 |
+| Giorgian De Arrascaeta |           2 |             4 |
+| Pedro Guilherme        |           4 |             1 |
++------------------------+-------------+---------------+
+3 rows in set (0.003 sec)
+```
+---
 
+## Query 5
 This query combines Player, Performance, and Match_Info to show player stats for each match. This multi-table join is useful for match analysis systems.
-Query 5
+```sql
 SELECT 
     P.full_name,
     M.opponent,
@@ -622,23 +659,89 @@ FROM Performance F
 JOIN Player P ON F.player_id = P.player_id
 JOIN Match_Info M ON F.match_id = M.match_id
 LIMIT 10;
+```
+**Sample Output**
+```code
++-----------------+---------------+-------+---------+----------------+
+| full_name       | opponent      | goals | assists | minutes_played |
++-----------------+---------------+-------+---------+----------------+
+| Pedro Guilherme | Vasco da Gama |     1 |       0 |             90 |
+| Pedro Guilherme | Botafogo      |     0 |       1 |             85 |
+| Pedro Guilherme | Fluminense    |     1 |       0 |             78 |
+| Pedro Guilherme | Palmeiras     |     2 |       0 |             90 |
+| Pedro Guilherme | São Paulo     |     0 |       0 |             82 |
+| Gabriel Barbosa | Vasco da Gama |     0 |       1 |             90 |
+| Gabriel Barbosa | Botafogo      |     1 |       0 |             90 |
+| Gabriel Barbosa | Fluminense    |     0 |       0 |             75 |
+| Gabriel Barbosa | Palmeiras     |     1 |       1 |             88 |
+| Gabriel Barbosa | São Paulo     |     0 |       0 |             82 |
++-----------------+---------------+-------+---------+----------------+
+10 rows in set (0.001 sec)
+```
 
+---
+
+## Query 6
 This query lists all staff members and any match they participated in. Staff who did not work in a match will still appear because of the LEFT JOIN.
-Query 6
+```sql
 SELECT 
     S.full_name,
     MS.match_id,
     MS.role_in_match
 FROM Staff S
-LEFT JOIN Match_staff MS ON S.staff_id = MS.staff_id
+LEFT JOIN Match_Staff MS ON S.staff_id = MS.staff_id
 ORDER BY S.staff_id
 LIMIT 20;
+```
+**Sample Output**
+```code
++-------------------+----------+---------------+
+| full_name         | match_id | role_in_match |
++-------------------+----------+---------------+
+| Tite              |        1 | Head Coach    |
+| Tite              |        2 | Head Coach    |
+| Tite              |        3 | Head Coach    |
+| Tite              |        4 | Head Coach    |
+| Tite              |        5 | Head Coach    |
+| Tite              |        6 | Head Coach    |
+| Tite              |        7 | Head Coach    |
+| Tite              |        8 | Head Coach    |
+| Tite              |        9 | Head Coach    |
+| Tite              |       10 | Head Coach    |
+| Tite              |       11 | Head Coach    |
+| Tite              |       12 | Head Coach    |
+| Tite              |       13 | Head Coach    |
+| César Sampaio     |        1 | Assistant     |
+| César Sampaio     |        5 | Assistant     |
+| Claudio Maldonado |        2 | Assistant     |
+| Claudio Maldonado |        6 | Assistant     |
+| Ramon Menezes     |        3 | Analyst       |
+| Flavio Meira      |        4 | Fitness Coach |
+| Marcos Braz       |     NULL | NULL          |
++-------------------+----------+---------------+
+20 rows in set (0.001 sec)
+```
 
+---
+
+## Query 7
 This query updates a player’s shirt number. This is used when a player changes jersey numbers during the season.
-Query 7
+```sql
 UPDATE Player
 SET shirt_number = 99
 WHERE full_name = 'Pedro Guilherme';
+```
+**Sample Output**
+```code
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+ player_id | full_name              | birth_date | nationality | position   | shirt_number |
++-----------+------------------------+------------+-------------+------------+--------------+
+|         1 | Pedro Guilherme        | 1997-06-20 | Brazil      | Forward    |           99 |
+```
+
+---
 
 This deletes a performance row where the player had 0 minutes played. Useful for cleaning data when substitutions never entered the match.
 Query 8
