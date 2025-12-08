@@ -89,64 +89,114 @@ The MatchStaff table connects staff members to the matches they participated in,
 ### Create Tables
 The following SQL creates the `Player`, `MatchInfo`, `Performance`,`Staff` and `MatchStaff` tables in the database. Note that it does not create a database, only the tables.
 
+```sql
+
+-- =========================================================
+-- PLAYER TABLE
+-- Stores all registered team players
+-- =========================================================
 
 CREATE TABLE Player (
-    player_id INT PRIMARY KEY AUTO_INCREMENT,
-    full_name VARCHAR(100) NOT NULL,
-    birth_date DATE NOT NULL,
-    nationality VARCHAR(50),
-    position VARCHAR(30) NOT NULL,
-    shirt_number INT UNIQUE,
+    player_id     INT PRIMARY KEY AUTO_INCREMENT,
+    full_name     VARCHAR(100) NOT NULL,
+    birth_date    DATE NOT NULL,
+    nationality   VARCHAR(50),
+    position      VARCHAR(30) NOT NULL,
+    shirt_number  INT UNIQUE,
+
     INDEX idx_position (position)
 );
 
+
+-- =========================================================
+-- MATCH INFO TABLE
+-- Stores all match details
+-- =========================================================
+
 CREATE TABLE Match_Info (
-    match_id INT PRIMARY KEY AUTO_INCREMENT,
-    match_date DATE NOT NULL,
-    opponent VARCHAR(100) NOT NULL,
-    competition VARCHAR(100),
-    stadium VARCHAR(100),
-    goals_for INT DEFAULT 0,
-    goals_against INT DEFAULT 0
+    match_id        INT PRIMARY KEY AUTO_INCREMENT,
+    match_date       DATE NOT NULL,
+    opponent        VARCHAR(100) NOT NULL,
+    competition     VARCHAR(100),
+    stadium         VARCHAR(100),
+    goals_for       INT DEFAULT 0,
+    goals_against   INT DEFAULT 0
 );
 
+
+-- =========================================================
+-- STAFF TABLE
+-- Stores coaches, trainers, and support staff
+-- =========================================================
+
 CREATE TABLE Staff (
-    staff_id INT PRIMARY KEY AUTO_INCREMENT,
-    full_name VARCHAR(100) NOT NULL,
-    role VARCHAR(50) NOT NULL,
-    email VARCHAR(100),
-    phone VARCHAR(20),
+    staff_id   INT PRIMARY KEY AUTO_INCREMENT,
+    full_name  VARCHAR(100) NOT NULL,
+    role       VARCHAR(50) NOT NULL,
+    email      VARCHAR(100),
+    phone      VARCHAR(20),
+
     INDEX idx_role (role)
 );
 
+
+-- =========================================================
+-- PERFORMANCE TABLE
+-- Links players to matches and records their statistics
+-- =========================================================
+
 CREATE TABLE Performance (
-    performance_id INT PRIMARY KEY AUTO_INCREMENT,
-    player_id INT NOT NULL,
-    match_id INT NOT NULL,
-    goals INT DEFAULT 0,
-    assists INT DEFAULT 0,
-    minutes_played INT DEFAULT 0,
-    rating VARCHAR(10),
-    FOREIGN KEY (player_id) REFERENCES Player(player_id)
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (match_id) REFERENCES Match_Info(match_id)
-        ON DELETE CASCADE ON UPDATE CASCADE,
+    performance_id  INT PRIMARY KEY AUTO_INCREMENT,
+    player_id        INT NOT NULL,
+    match_id         INT NOT NULL,
+    goals            INT DEFAULT 0,
+    assists          INT DEFAULT 0,
+    minutes_played   INT DEFAULT 0,
+    rating           VARCHAR(10),
+
+    FOREIGN KEY (player_id) 
+        REFERENCES Player(player_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (match_id) 
+        REFERENCES Match_Info(match_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
     INDEX idx_player (player_id),
     INDEX idx_match (match_id)
 );
 
+
+-- =========================================================
+-- MATCH_STAFF TABLE
+-- Links staff members to specific matches
+-- =========================================================
+
 CREATE TABLE Match_staff (
-    matchstaff_id INT PRIMARY KEY AUTO_INCREMENT,
-    match_id INT NOT NULL,
-    staff_id INT NOT NULL,
-    role_in_match VARCHAR(50),
-    FOREIGN KEY (match_id) REFERENCES Match_Info(match_id)
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (staff_id) REFERENCES Staff(staff_id)
-        ON DELETE CASCADE ON UPDATE CASCADE,
+    matchstaff_id   INT PRIMARY KEY AUTO_INCREMENT,
+    match_id         INT NOT NULL,
+    staff_id         INT NOT NULL,
+    role_in_match   VARCHAR(50),
+
+    FOREIGN KEY (match_id) 
+        REFERENCES Match_Info(match_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (staff_id) 
+        REFERENCES Staff(staff_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
     INDEX idx_matchstaff_match (match_id),
     INDEX idx_matchstaff_staff (staff_id)
 );
+
+```
+
+---
 
 INSERT INTO Player (full_name, birth_date, nationality, position, shirt_number)
 VALUES
